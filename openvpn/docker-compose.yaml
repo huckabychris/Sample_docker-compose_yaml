@@ -1,0 +1,11 @@
+version: "3"
+services:
+  ovpn:
+    image: kylemanna/openvpn:latest
+    restart: always
+    volumes:
+      - ./etc-openvpn:/etc/openvpn:rw
+    ports:
+      - #incoming_port:openvpn_port/udp default 1194
+    cap_add:
+      - NET_ADMIN

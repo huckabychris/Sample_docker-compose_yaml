@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    dns:
+      - 127.0.0.1
+      - #secondary dns
+    ports:
+      - "53:53/tcp" #necessary for dns
+      - "53:53/udp" #necessary for dns
+      - "67:67/udp" #necessary for dns
+      - "80:80/tcp" #necessary for web interface
+    environment:
+      TZ: #timezone
+      WEBPASSWORD: #password
+    volumes:
+      - './etc-pihole:/etc/pihole' #pihole config files
+      - './etc-dnsmasq.d:/etc/dnsmasq.d' #dnsmasq config files
+    cap_add:
+      - NET_ADMIN
+    restart: always
